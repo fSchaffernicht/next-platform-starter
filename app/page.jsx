@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Confetti from 'react-confetti';
 
 export default function Page() {
     const [start, setStart] = useState(false);
@@ -21,8 +22,10 @@ export default function Page() {
                 <Countdown>
                     <Movies />
                     <WhoElse />
+                    <Single />
                     <Present />
                     <Weather />
+                    <TheDayBefore />
                 </Countdown>
             )}
         </main>
@@ -31,19 +34,54 @@ export default function Page() {
 
 function Present() {
     const [isOpen, setIsOpen] = useState(false);
+    const ref = useRef(null);
+
     return (
-        <div className="bg-pink-800 p-6 w-screen">
-            <h2 className="font-bold text-4xl mb-6">Geschenk 🎁 öffnen!</h2>
-            <Button onClick={() => setIsOpen(!isOpen)}>{!isOpen ? 'Öffnen' : 'Schließen'}</Button>
-            {isOpen && (
-                <div className="mt-6">
-                    <Countdown time={10}>
-                        <div className="text-center font-bold text-2xl">
-                            Gutschein für eine neue Brille für bis zu 500 EUR! 🤓{' '}
-                        </div>
-                    </Countdown>
-                </div>
-            )}
+        <div ref={ref} className="bg-pink-800 p-6 w-screen relative">
+            <div>
+                <h2 className="font-bold text-4xl mb-6">Geschenk 🎁 öffnen!</h2>
+                <Button onClick={() => setIsOpen(!isOpen)}>{!isOpen ? 'Öffnen' : 'Schließen'}</Button>
+                {isOpen && (
+                    <div className="mt-6">
+                        <Countdown time={10}>
+                            <div className="text-center font-bold text-2xl">
+                                <Confetti height={ref?.current?.getBoundingClientRect().height ?? 340} />
+                                Gutschein für eine neue Brille für bis zu 500 EUR! 🤓{' '}
+                            </div>
+                        </Countdown>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
+function TheDayBefore() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <div className="bg-slate-900 p-6 w-screen relative">
+            <div>
+                <h2 className="font-bold text-4xl mb-6">Ein Tag vor deiner Geburt in Deutschland</h2>
+                <Button onClick={() => setIsOpen(!isOpen)}>{!isOpen ? 'Öffnen' : 'Schließen'}</Button>
+                {isOpen && (
+                    <div className="mt-6">
+                        <ul>
+                            <li className="mb-6">
+                                Mehr als zweitausend Demonstranten stürmen die Zentrale des ehemaligen
+                                Staatssicherheitsdienstes (MfS) in Ost-Berlin und verwüsten sie teilweise.
+                            </li>
+                            <li className="mb-6">
+                                Ministerpräsident Hans Modrow schlägt dem Runden Tisch die Teilnahme an der
+                                Regierungsarbeit vor.{' '}
+                            </li>
+                            <li className="mb-6">
+                                In Erfurt erscheint die erste unabhängige Tageszeitung der DDR, die Thüringer
+                                Allgemeine. Damit endet das SED-Medienmonopol.{' '}
+                            </li>
+                        </ul>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
@@ -57,7 +95,7 @@ function WhoElse() {
             {isOpen && (
                 <ul className="mt-6">
                     <li className="mb-6">
-                        <h3 className="font-bold">Gregor Gysi</h3>
+                        <h3 className="font-bold mb-2">Gregor Gysi</h3>
                         <div>
                             deutscher Rechtsanwalt, Politiker (Die Linke, ehemals SED und PDS), Autor und Moderator.
                             2020 wurde er zum außenpolitischen Sprecher der Fraktion Die Linke im Bundestag ernannt.
@@ -67,14 +105,14 @@ function WhoElse() {
                         </div>
                     </li>
                     <li className="mb-6">
-                        <h3 className="font-bold">Marilyn Horne</h3>
+                        <h3 className="font-bold mb-2">Marilyn Horne</h3>
                         <div>US-amerikanische Opern- und Konzertsängerin</div>
                         <div>
                             <small>Geboren am: 16. Januar 1934, ist 90 Jahre alt.</small>
                         </div>
                     </li>
                     <li className="mb-6">
-                        <h3 className="font-bold">John Carpenter</h3>
+                        <h3 className="font-bold mb-2">John Carpenter</h3>
                         <div>
                             US-amerikanischer Regisseur, Drehbuchautor, Produzent, Schauspieler und Filmmusikkomponist.
                             Mit Filmen wie Halloween – Die Nacht des Grauens (1978) oder Die Klapperschlange (1981)
@@ -84,7 +122,7 @@ function WhoElse() {
                         </div>
                     </li>
                     <li className="mb-6">
-                        <h3 className="font-bold">Wei Wei</h3>
+                        <h3 className="font-bold mb-2">Wei Wei</h3>
                         <div>chinesischer Essayist und Romanschriftsteller</div>
                         <div>
                             <small>
@@ -93,7 +131,7 @@ function WhoElse() {
                         </div>
                     </li>
                     <li className="mb-6">
-                        <h3 className="font-bold">Rösli Streiff</h3>
+                        <h3 className="font-bold mb-2">Rösli Streiff</h3>
                         <div>schweizerische Skirennfahrerin</div>
                         <div>
                             <small>
@@ -102,14 +140,14 @@ function WhoElse() {
                         </div>
                     </li>
                     <li className="mb-6">
-                        <h3 className="font-bold">Kate Moss</h3>
+                        <h3 className="font-bold mb-2">Kate Moss</h3>
                         <div>britisches Fotomodell</div>
                         <div>
                             <small>Geboren am: 16. Januar 1974, ist 50 Jahre alt.</small>
                         </div>
                     </li>
                     <li className="mb-6">
-                        <h3 className="font-bold">Paul Singer</h3>
+                        <h3 className="font-bold mb-2">Paul Singer</h3>
                         <div>deutscher Fabrikant, SPD-Mitbegründer, Vorsitzender und Reichstagsabgeordneter</div>
                         <div>
                             <small>
@@ -118,7 +156,7 @@ function WhoElse() {
                         </div>
                     </li>
                     <li className="mb-6">
-                        <h3 className="font-bold">Mario Moretti</h3>
+                        <h3 className="font-bold mb-2">Mario Moretti</h3>
                         <div>italienischer Terrorist</div>
                         <div>
                             <small>Geboren am: 16. Januar 1946, ist 78 Jahre alt.</small>
@@ -142,18 +180,18 @@ function Weather() {
                         <h2>💦 🌧️</h2>
                     </div>
                     <ul>
-                        <li className="mb-2">Berlin: 11°C - wolkig mit etwas Regen</li>
-                        <li className="mb-2">Bremen: 12°C - bedeckt mit etwas Regen</li>
-                        <li className="mb-2">Dresden: 10°C - bedeckt mit etwas Regen</li>
-                        <li className="mb-2">Düsseldorf: 11°C - bedeckt mit etwas Regen</li>
-                        <li className="mb-2">Erfurt-Weimar: 9°C - bedeckt</li>
-                        <li className="mb-2">Hamburg-Fuhlsbüttel: 12°C - bedeckt mit etwas Regen</li>
-                        <li className="mb-2">Hannover: 11°C - bedeckt mit etwas Regen</li>
-                        <li className="mb-2">Kiel-Holtenau: 11°C - wolkig mit etwas Regen</li>
-                        <li className="mb-2">Magdeburg: 11°C - bedeckt mit etwas Regen</li>
-                        <li className="mb-2">Saarbrücken/Ensheim: 6°C - bedeckt mit etwas Regen</li>
-                        <li className="mb-2">Schwerin: 11°C - stark bewölkt mit etwas Regen</li>
-                        <li className="mb-2">Stuttgart/Echterdingen: 8°C - wolkig</li>
+                        <li className="mb-4">Berlin: 11°C - wolkig mit etwas Regen</li>
+                        <li className="mb-4">Bremen: 12°C - bedeckt mit etwas Regen</li>
+                        <li className="mb-4">Dresden: 10°C - bedeckt mit etwas Regen</li>
+                        <li className="mb-4">Düsseldorf: 11°C - bedeckt mit etwas Regen</li>
+                        <li className="mb-4">Erfurt-Weimar: 9°C - bedeckt</li>
+                        <li className="mb-4">Hamburg-Fuhlsbüttel: 12°C - bedeckt mit etwas Regen</li>
+                        <li className="mb-4">Hannover: 11°C - bedeckt mit etwas Regen</li>
+                        <li className="mb-4">Kiel-Holtenau: 11°C - wolkig mit etwas Regen</li>
+                        <li className="mb-4">Magdeburg: 11°C - bedeckt mit etwas Regen</li>
+                        <li className="mb-4">Saarbrücken/Ensheim: 6°C - bedeckt mit etwas Regen</li>
+                        <li className="mb-4">Schwerin: 11°C - stark bewölkt mit etwas Regen</li>
+                        <li className="mb-4">Stuttgart/Echterdingen: 8°C - wolkig</li>
                     </ul>
                 </>
             )}
@@ -189,8 +227,29 @@ function Movies() {
     );
 }
 
-function Button({ ...props }) {
-    return <button className="bg-white text-black py-2 px-4 rounded hover:bg-gray-300 transition-all" {...props} />;
+function Single() {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+        <div className="bg-cyan-800 p-6 w-screen">
+            <h2 className="font-bold text-4xl mb-6">Single Chart Top Hit</h2>
+            <Button onClick={() => setIsOpen(!isOpen)}>{!isOpen ? 'Öffnen' : 'Schließen'}</Button>
+            {isOpen && (
+                <div className="mt-6">
+                    Die Single-Charts in Deutschland wurden am 16. Januar 1990 von Phil Collins mit dem Song{' '}
+                    <strong>„Another Day in Paradise”</strong> auf Position 1 angeführt.
+                </div>
+            )}
+        </div>
+    );
+}
+
+function Button({ bg = 'bg-white', ...props }) {
+    return (
+        <button
+            className={'bg-white text-slate-800 py-2 px-4 font-bold rounded hover:bg-gray-300 transition-all'}
+            {...props}
+        />
+    );
 }
 
 const Countdown = ({ children, time = 3 }) => {
