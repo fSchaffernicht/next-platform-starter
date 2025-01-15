@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Confetti from 'react-confetti';
+import { motion } from 'motion/react';
 
 export default function Page() {
     const [start, setStart] = useState(false);
@@ -53,7 +54,7 @@ function Present() {
                                     height={ref?.current?.getBoundingClientRect().height ?? 340}
                                     width={ref?.current?.getBoundingClientRect().width ?? 600}
                                 />
-                                Gutschein für eine neue Brille für bis zu 500 EUR! 🤓{' '}
+                                Gutschein für eine neue Brille! 🤓{' '}
                             </div>
                         </Countdown>
                     </div>
@@ -73,7 +74,7 @@ function TheDayBefore() {
                     {!isOpen ? 'Öffnen' : 'Schließen'}
                 </Button>
                 {isOpen && (
-                    <div className="mt-6">
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-6">
                         <ul>
                             <li className="mb-6">
                                 Mehr als zweitausend Demonstranten stürmen die Zentrale des ehemaligen
@@ -88,7 +89,7 @@ function TheDayBefore() {
                                 Allgemeine. Damit endet das SED-Medienmonopol.{' '}
                             </li>
                         </ul>
-                    </div>
+                    </motion.div>
                 )}
             </div>
         </div>
@@ -104,7 +105,7 @@ function WhoElse() {
                 {!isOpen ? 'Öffnen' : 'Schließen'}
             </Button>
             {isOpen && (
-                <ul className="mt-6">
+                <motion.ul initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-6">
                     <li className="mb-6">
                         <h3 className="font-bold mb-2">Gregor Gysi</h3>
                         <div>
@@ -173,7 +174,7 @@ function WhoElse() {
                             <small>Geboren am: 16. Januar 1946, ist 78 Jahre alt.</small>
                         </div>
                     </li>
-                </ul>
+                </motion.ul>
             )}
         </div>
     );
@@ -188,7 +189,7 @@ function Weather() {
                 {!isOpen ? 'Öffnen' : 'Schließen'}
             </Button>
             {isOpen && (
-                <>
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                     <div className="my-6">
                         <h2>💦 🌧️</h2>
                     </div>
@@ -206,7 +207,7 @@ function Weather() {
                         <li className="mb-4">Schwerin: 11°C - stark bewölkt mit etwas Regen</li>
                         <li className="mb-4">Stuttgart/Echterdingen: 8°C - wolkig</li>
                     </ul>
-                </>
+                </motion.div>
             )}
         </div>
     );
@@ -221,7 +222,7 @@ function Movies() {
                 {!isOpen ? 'Öffnen' : 'Schließen'}
             </Button>
             {isOpen && (
-                <ul className="mt-6">
+                <motion.ul initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-6">
                     <li className="mb-4 font-bold text-yellow-300 text-center uppercase">Ghost</li>
                     <li className="mb-4 font-bold text-yellow-300 text-center uppercase">Home Alone</li>
                     <li className="mb-4 font-bold text-yellow-300 text-center uppercase">Pretty Woman</li>
@@ -236,7 +237,7 @@ function Movies() {
                         Teenage Mutant Ninja Turtles
                     </li>
                     <li className="mb-4 font-bold text-yellow-300 text-center uppercase">Kindergarten Cop</li>
-                </ul>
+                </motion.ul>
             )}
         </div>
     );
@@ -251,10 +252,10 @@ function Single() {
                 {!isOpen ? 'Öffnen' : 'Schließen'}
             </Button>
             {isOpen && (
-                <div className="mt-6">
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-6">
                     Die Single-Charts in Deutschland wurden am 16. Januar 1990 von Phil Collins mit dem Song{' '}
                     <strong>„Another Day in Paradise”</strong> auf Position 1 angeführt.
-                </div>
+                </motion.div>
             )}
         </div>
     );
@@ -283,9 +284,9 @@ const Countdown = ({ children, time = 3 }) => {
     }, [count]);
 
     return (
-        <>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} key={count}>
             {count > 0 && <div className="text-4xl text-center font-bold">{count}</div>}
             {showChildren && <div>{children}</div>}
-        </>
+        </motion.div>
     );
 };
