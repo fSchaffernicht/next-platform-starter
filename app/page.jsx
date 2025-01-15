@@ -6,17 +6,19 @@ import Confetti from 'react-confetti';
 export default function Page() {
     const [start, setStart] = useState(false);
     return (
-        <main className="container m-auto w-screen">
-            <div className="p-6">
+        <main className="container m-auto w-screen max-w-[600px]">
+            <div className="p-6 text-white">
                 <h1 className="text-6xl">16.01.1990</h1>
-                <h2>
-                    Mein Süßer Krümel, heute am 16. Januar feierst du deinen Geburtstag. Ich liebe dich sehr 😘 und
-                    wünsche dir einen wunderschönen Tag! 🎉🎈🎂
-                </h2>
+                <p className="text-lg">
+                    Mein Süßer Krümel, heute am 16. Januar feierst du deinen Geburtstag. Finde heraus was es mit deinem
+                    Geburstdatum auf sich hat! Ich liebe dich sehr 😘 und wünsche dir einen wunderschönen Tag! ❤️ 🎉🎈🎂
+                </p>
             </div>
             {!start ? (
                 <div className="text-center">
-                    <Button onClick={() => setStart(true)}>Loslegen!</Button>
+                    <Button bg="bg-white" color="text-indigo-900" onClick={() => setStart(true)}>
+                        Los gehts!
+                    </Button>
                 </div>
             ) : (
                 <Countdown>
@@ -37,15 +39,20 @@ function Present() {
     const ref = useRef(null);
 
     return (
-        <div ref={ref} className="bg-pink-800 p-6 w-screen relative">
+        <div ref={ref} className="bg-pink-800 p-6 relative">
             <div>
                 <h2 className="font-bold text-4xl mb-6">Geschenk 🎁 öffnen!</h2>
-                <Button onClick={() => setIsOpen(!isOpen)}>{!isOpen ? 'Öffnen' : 'Schließen'}</Button>
+                <Button color="text-pink-800" onClick={() => setIsOpen(!isOpen)}>
+                    {!isOpen ? 'Öffnen' : 'Schließen'}
+                </Button>
                 {isOpen && (
                     <div className="mt-6">
                         <Countdown time={10}>
                             <div className="text-center font-bold text-2xl">
-                                <Confetti height={ref?.current?.getBoundingClientRect().height ?? 340} />
+                                <Confetti
+                                    height={ref?.current?.getBoundingClientRect().height ?? 340}
+                                    width={ref?.current?.getBoundingClientRect().width ?? 600}
+                                />
                                 Gutschein für eine neue Brille für bis zu 500 EUR! 🤓{' '}
                             </div>
                         </Countdown>
@@ -59,10 +66,12 @@ function TheDayBefore() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="bg-slate-900 p-6 w-screen relative">
+        <div className="bg-slate-900 p-6 relative">
             <div>
                 <h2 className="font-bold text-4xl mb-6">Ein Tag vor deiner Geburt in Deutschland</h2>
-                <Button onClick={() => setIsOpen(!isOpen)}>{!isOpen ? 'Öffnen' : 'Schließen'}</Button>
+                <Button color="text-slate-900" onClick={() => setIsOpen(!isOpen)}>
+                    {!isOpen ? 'Öffnen' : 'Schließen'}
+                </Button>
                 {isOpen && (
                     <div className="mt-6">
                         <ul>
@@ -89,9 +98,11 @@ function TheDayBefore() {
 function WhoElse() {
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <div className="bg-slate-800 p-6 w-screen">
+        <div className="bg-slate-800 p-6">
             <h2 className="font-bold text-4xl mb-6">Wer feiert heute noch Geburtstag? 🧐</h2>
-            <Button onClick={() => setIsOpen(!isOpen)}>{!isOpen ? 'Öffnen' : 'Schließen'}</Button>
+            <Button color="text-slate-800" onClick={() => setIsOpen(!isOpen)}>
+                {!isOpen ? 'Öffnen' : 'Schließen'}
+            </Button>
             {isOpen && (
                 <ul className="mt-6">
                     <li className="mb-6">
@@ -171,9 +182,11 @@ function WhoElse() {
 function Weather() {
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <div className="bg-indigo-900 p-6 w-screen">
+        <div className="bg-indigo-900 p-6">
             <h2 className="font-bold text-4xl mb-6">Wie war das Wetter am 16.01.1990 </h2>
-            <Button onClick={() => setIsOpen(!isOpen)}>{!isOpen ? 'Öffnen' : 'Schließen'}</Button>
+            <Button color="text-indigo-900" onClick={() => setIsOpen(!isOpen)}>
+                {!isOpen ? 'Öffnen' : 'Schließen'}
+            </Button>
             {isOpen && (
                 <>
                     <div className="my-6">
@@ -202,9 +215,11 @@ function Weather() {
 function Movies() {
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <div className="bg-emerald-900 p-6 w-screen">
+        <div className="bg-emerald-900 p-6">
             <h2 className="font-bold text-4xl mb-6">Welche Filme sind im Jahr 1990 veröffentlicht worden?</h2>
-            <Button onClick={() => setIsOpen(!isOpen)}>{!isOpen ? 'Öffnen' : 'Schließen'}</Button>
+            <Button color="text-emerald-900" onClick={() => setIsOpen(!isOpen)}>
+                {!isOpen ? 'Öffnen' : 'Schließen'}
+            </Button>
             {isOpen && (
                 <ul className="mt-6">
                     <li className="mb-4 font-bold text-yellow-300 text-center uppercase">Ghost</li>
@@ -230,9 +245,11 @@ function Movies() {
 function Single() {
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <div className="bg-cyan-800 p-6 w-screen">
+        <div className="bg-cyan-800 p-6">
             <h2 className="font-bold text-4xl mb-6">Single Chart Top Hit</h2>
-            <Button onClick={() => setIsOpen(!isOpen)}>{!isOpen ? 'Öffnen' : 'Schließen'}</Button>
+            <Button color="text-cyan-800" onClick={() => setIsOpen(!isOpen)}>
+                {!isOpen ? 'Öffnen' : 'Schließen'}
+            </Button>
             {isOpen && (
                 <div className="mt-6">
                     Die Single-Charts in Deutschland wurden am 16. Januar 1990 von Phil Collins mit dem Song{' '}
@@ -243,13 +260,11 @@ function Single() {
     );
 }
 
-function Button({ bg = 'bg-white', ...props }) {
-    return (
-        <button
-            className={'bg-white text-slate-800 py-2 px-4 font-bold rounded hover:bg-gray-300 transition-all'}
-            {...props}
-        />
-    );
+function Button({ bg = 'bg-white', color = 'text-indigo-900', ...props }) {
+    const classes = ['py-2 px-8 font-bold rounded-full hover:bg-gray-300 transition-all', bg, color]
+        .filter(Boolean)
+        .join(' ');
+    return <button className={classes} {...props} />;
 }
 
 const Countdown = ({ children, time = 3 }) => {
